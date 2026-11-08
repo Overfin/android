@@ -16,6 +16,19 @@ A home screen icon opens its own server. A server with its own branding offers
 one, with its name and logo, when it's added, and any server can get one from
 the list. Android asks before adding it.
 
+## Install
+
+Download the APK from the [latest release](https://github.com/Overfin/android/releases/latest)
+and open it on the phone (Android 7 or later); Android asks to allow
+installing from the browser or file manager the first time. Releases are
+signed with the same key, so each one installs over the last; the
+certificate's SHA-256 fingerprint is
+`bf8a87e53ef1b27c13cad9eae8f9b1f1edb98cb85ba9401060c391567fb269c8`.
+
+Password managers fill the sign-in when they're Android's autofill service
+(Settings, Passwords and autofill): a browser's own saved passwords don't
+reach apps.
+
 ## Build
 
 With JDK 21 and the Android SDK (`ANDROID_HOME`, or `sdk.dir` in
@@ -25,7 +38,11 @@ With JDK 21 and the Android SDK (`ANDROID_HOME`, or `sdk.dir` in
 ./gradlew test lint assembleDebug
 ```
 
-The APK is `app/build/outputs/apk/debug/app-debug.apk`.
+The APK is `app/build/outputs/apk/debug/app-debug.apk`. `assembleRelease`
+signs with the key named by the `overfin.signing` property (a properties
+file with `storeFile`, `password` and `alias`), else
+`~/.config/overfin-android/release.properties`; without one, the release APK
+is unsigned.
 
 ## How it's made
 
