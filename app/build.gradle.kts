@@ -1,5 +1,17 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
+}
+
+// Releases are signed with the maintainer's key, kept outside the repository:
+// a properties file (storeFile, password, alias) named by the
+// overfin.signing property, else ~/.config/overfin-android/release.properties.
+// Without it, release builds are left unsigned; debug builds are unchanged.
+val signing = Properties().apply {
+    val file = file((findProperty("overfin.signing") as String?)
+        ?: "${System.getProperty("user.home")}/.config/overfin-android/release.properties")
+    if (file.isFile) file.inputStream().use { load(it) }
 }
 
 android {
@@ -11,6 +23,21 @@ android {
         targetSdk = 37
         versionCode = 5
         versionName = "0.3.2"
+    }
+    signingConfigs {
+        if (signing.containsKey("storeFile")) {
+            create("release") {
+                storeFile = file(signing.getProperty("storeFile"))
+                storePassword = signing.getProperty("password")
+                keyAlias = signing.getProperty("alias")
+                keyPassword = signing.getProperty("password")
+            }
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.findByName("release")
+        }
     }
 }
 
