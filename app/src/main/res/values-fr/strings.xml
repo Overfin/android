@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="server_address">Adresse du serveur</string>
+    <string name="address_hint">exemple.org</string>
+    <string name="connect">Se connecter</string>
+    <string name="error_address">Saisir l\'adresse du serveur. Elle doit utiliser https.</string>
+    <string name="error_unreachable">Ce serveur est injoignable. Vérifier l\'adresse et la connexion.</string>
+    <string name="error_not_overfin">Cette adresse n\'est pas celle d\'un serveur Overfin.</string>
+    <string name="servers">Serveurs</string>
+    <string name="add_server">Ajouter un serveur</string>
+    <string name="add_icon">Ajouter à l\'écran d\'accueil</string>
+    <string name="remove">Retirer</string>
+    <string name="cancel">Annuler</string>
+    <string name="remove_question">Retirer %1$s ?</string>
+    <string name="remove_details">La session et les données de ce serveur seront effacées de cet appareil. Le compte reste intact.</string>
+    <string name="icon_removed">Ce serveur a été retiré de l\'application.</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/logo"
+        android:shortcutId="change_server"
+        android:shortcutShortLabel="@string/servers">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="io.github.overfin.android.ServersActivity"
+            android:targetPackage="io.github.overfin.android" />
+    </shortcut>
+</shortcuts>

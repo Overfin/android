@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Overfin</string>
+    <string name="server_address">Server address</string>
+    <string name="address_hint">example.org</string>
+    <string name="connect">Connect</string>
+    <string name="error_address">Enter the server\'s address. It must use https.</string>
+    <string name="error_unreachable">This server can\'t be reached. Check the address and your connection.</string>
+    <string name="error_not_overfin">This address isn\'t an Overfin server.</string>
+    <string name="servers">Servers</string>
+    <string name="add_server">Add a server</string>
+    <string name="add_icon">Add to home screen</string>
+    <string name="remove">Remove</string>
+    <string name="cancel">Cancel</string>
+    <string name="remove_question">Remove %1$s?</string>
+    <string name="remove_details">This server\'s sign-in and data will be erased from this device. The account itself stays.</string>
+    <string name="icon_removed">This server was removed from the app.</string>
+</resources>

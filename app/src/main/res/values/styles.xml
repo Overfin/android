@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="page">#0C0D11</color>
+    <color name="text">#F2F3F5</color>
+    <color name="accent">#5CC2FF</color>
+    <style name="Theme.Overfin" parent="android:Theme.Material.NoActionBar">
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:colorBackground">@color/page</item>
+        <item name="android:windowBackground">@color/page</item>
+        <item name="android:textColorPrimary">@color/text</item>
+    </style>
+</resources>
