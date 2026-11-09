@@ -84,7 +84,13 @@ object ServerIcon {
                 .setIntent(Intent(activity, OpenActivity::class.java).setAction(Intent.ACTION_VIEW).putExtra(MainActivity.EXTRA_SERVER, origin))
                 .build()
             activity.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putBoolean(origin, true).apply()
-            shortcuts.requestPinShortcut(shortcut, null)
+            // Android refuses it for an app no longer in front (Home, while
+            // the logo came).
+            try {
+                shortcuts.requestPinShortcut(shortcut, null)
+            } catch (_: IllegalStateException) {
+                activity.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().remove(origin).apply()
+            }
         }
     }
 

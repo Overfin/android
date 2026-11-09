@@ -135,6 +135,9 @@ class MainActivity : Activity() {
         }
 
         override fun onPageFinished(view: WebView, url: String) {
+            // Back on the server, however it came back (Back, a script):
+            // the lock holds again.
+            if (Server.sameOrigin(url, origin)) away = false
             if (forgetHistory) view.clearHistory()
             forgetHistory = false
         }

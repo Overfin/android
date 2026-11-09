@@ -67,6 +67,20 @@ class ConnectActivity : Activity() {
     private class Answer(val name: String? = null, val problem: Int = 0)
 
     companion object {
+        /** An Overfin server's info is small: what's beyond this isn't read. */
+        private const val INFO_MOST = 64 * 1024
+
+        private fun firstBytes(conn: HttpURLConnection): String = conn.inputStream.use { input ->
+            val buffer = ByteArray(INFO_MOST)
+            var read = 0
+            while (read < INFO_MOST) {
+                val n = input.read(buffer, read, INFO_MOST - read)
+                if (n < 0) break
+                read += n
+            }
+            String(buffer, 0, read)
+        }
+
         /** askInfo tells the name of the Overfin server at origin, or what's wrong with it. */
         private fun askInfo(origin: String): Answer {
             val conn = URL("$origin/api/v1/info").openConnection() as HttpURLConnection
@@ -75,7 +89,7 @@ class ConnectActivity : Activity() {
                 conn.readTimeout = 10_000
                 conn.setRequestProperty("Accept", "application/json")
                 if (conn.responseCode != HttpURLConnection.HTTP_OK) return Answer(problem = R.string.error_not_overfin)
-                val info = JSONObject(conn.inputStream.bufferedReader().use { it.readText() })
+                val info = JSONObject(firstBytes(conn))
                 info.getString("apiVersion")
                 info.getJSONArray("features")
                 Answer(name = info.getString("name"))
