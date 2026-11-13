@@ -103,6 +103,10 @@ class MainActivity : Activity() {
     @SuppressLint("SetJavaScriptEnabled")
     private fun newWebView() = WebView(this).apply {
         setBackgroundColor(getColor(R.color.page))
+        // The site draws its own scrollbar over the page: Android's would
+        // make two.
+        isVerticalScrollBarEnabled = false
+        isHorizontalScrollBarEnabled = false
         settings.javaScriptEnabled = true
         settings.domStorageEnabled = true
         // The next episode starts by itself.
