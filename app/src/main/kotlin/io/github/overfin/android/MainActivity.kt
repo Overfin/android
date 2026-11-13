@@ -114,6 +114,7 @@ class MainActivity : Activity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) importantForAutofill = View.IMPORTANT_FOR_AUTOFILL_YES
         webViewClient = Client()
         webChromeClient = Chrome()
+        addJavascriptInterface(ScreenHdr(this@MainActivity), ScreenHdr.NAME)
     }
 
     private inner class Client : WebViewClient() {
