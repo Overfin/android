@@ -8,6 +8,6 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetClass="io.github.overfin.android.ServersActivity"
-            android:targetPackage="io.github.overfin.android" />
+            android:targetPackage="org.overfin.android" />
     </shortcut>
 </shortcuts>

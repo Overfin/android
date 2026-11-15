@@ -18,7 +18,7 @@ android {
     namespace = "io.github.overfin.android"
     compileSdk = 37
     defaultConfig {
-        applicationId = "io.github.overfin.android"
+        applicationId = "org.overfin.android"
         minSdk = 24
         targetSdk = 37
         versionCode = 6
