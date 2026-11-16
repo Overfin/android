@@ -20,6 +20,8 @@ class ServerTest {
         assertNull(Server.originOf("http://example.org"))
         assertNull(Server.originOf("ftp://example.org"))
         assertNull(Server.originOf("exa mple.org"))
+        assertNull(Server.originOf("example.org:99999"))
+        assertNull(Server.originOf("example.org:0"))
     }
 
     @Test

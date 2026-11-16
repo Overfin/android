@@ -49,6 +49,8 @@ object Server {
         }
         if (!uri.scheme.equals("https", ignoreCase = true)) return null
         val host = uri.host?.lowercase() ?: return null
+        // A port that can't be one (URI takes any number) is no address.
+        if (uri.port != -1 && uri.port !in 1..65535) return null
         return if (uri.port == -1) "https://$host" else "https://$host:${uri.port}"
     }
 
