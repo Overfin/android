@@ -155,7 +155,9 @@ class MainActivity : Activity() {
         }
 
         override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
-            if (!request.isForMainFrame) return
+            // On an outside identity provider's pages, its own trouble isn't
+            // the server's: the page says so, and Back returns.
+            if (!request.isForMainFrame || away) return
             startActivity(Intent(this@MainActivity, ServersActivity::class.java).putExtra(ServersActivity.EXTRA_UNREACHABLE, true))
             finish()
         }
