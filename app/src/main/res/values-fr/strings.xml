@@ -3,7 +3,7 @@
     <string name="server_address">Adresse du serveur</string>
     <string name="address_hint">exemple.org</string>
     <string name="connect">Se connecter</string>
-    <string name="error_address">Saisir l\'adresse du serveur. Elle doit utiliser https.</string>
+    <string name="error_address">Saisir l\'adresse du serveur. Elle doit utiliser https, sauf une adresse de réseau privé (comme 192.168.1.10).</string>
     <string name="error_unreachable">Ce serveur est injoignable. Vérifier l\'adresse et la connexion.</string>
     <string name="error_not_overfin">Cette adresse n\'est pas celle d\'un serveur Overfin.</string>
     <string name="servers">Serveurs</string>

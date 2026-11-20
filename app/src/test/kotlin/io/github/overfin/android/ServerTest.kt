@@ -15,6 +15,25 @@ class ServerTest {
     }
 
     @Test
+    fun plainHttpOnlyForAPrivateAddress() {
+        assertEquals("http://192.168.1.10", Server.originOf("192.168.1.10"))
+        assertEquals("http://10.0.0.12:8090", Server.originOf("http://10.0.0.12:8090/films"))
+        assertEquals("http://172.20.1.1", Server.originOf("http://172.20.1.1"))
+        assertEquals("http://100.100.1.2", Server.originOf("100.100.1.2"))
+        assertEquals("http://[fd12::1]:8080", Server.originOf("http://[fd12::1]:8080"))
+        assertEquals("https://192.168.1.10", Server.originOf("https://192.168.1.10"))
+        assertNull(Server.originOf("http://8.8.8.8"))
+        assertNull(Server.originOf("http://172.32.0.1"))
+        assertNull(Server.originOf("http://100.128.0.1"))
+        assertNull(Server.originOf("http://192.168.1.300"))
+        assertNull(Server.originOf("http://127.0.0.1"))
+        assertNull(Server.originOf("http://[2001:db8::1]"))
+        assertNull(Server.originOf("http://media.home.arpa"))
+        assertNull(Server.originOf("http://10.0.0.1.example.org"))
+        assertEquals("https://8.8.8.8", Server.originOf("8.8.8.8"))
+    }
+
+    @Test
     fun onlyHttpsAddressesAreAccepted() {
         assertNull(Server.originOf(""))
         assertNull(Server.originOf("http://example.org"))
@@ -44,5 +63,15 @@ class ServerTest {
         assertFalse(Server.sameOrigin("https://example.org:8443/", origin))
         assertFalse(Server.sameOrigin("https://other.test/?x=https://example.org", origin))
         assertFalse(Server.sameOrigin("not a url", origin))
+    }
+
+    @Test
+    fun aPlainHttpServerStaysItself() {
+        val origin = "http://192.168.1.10"
+        assertTrue(Server.sameOrigin("http://192.168.1.10/films", origin))
+        assertTrue(Server.sameOrigin("http://192.168.1.10:80/", origin))
+        assertFalse(Server.sameOrigin("https://192.168.1.10/", origin))
+        assertFalse(Server.sameOrigin("http://192.168.1.10:8090/", origin))
+        assertTrue(Server.sameOrigin("http://192.168.1.10:8090/", "http://192.168.1.10:8090"))
     }
 }

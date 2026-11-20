@@ -7,7 +7,8 @@ release is only needed when the app's own part changes.
 
 The app adds what a page can't do by itself in a WebView: fullscreen video,
 keeping the screen on while playing, the back button. Addresses must use
-https.
+https, but for a private network's address written as such (as
+`192.168.1.10`, a server's gateway on its LAN), which may be plain http.
 
 It can hold several servers, each with its own account: nothing has to be set
 up between them. Long-press the app's icon and choose "Servers" to add, open or
