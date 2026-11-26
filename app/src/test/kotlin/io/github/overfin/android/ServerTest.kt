@@ -74,4 +74,21 @@ class ServerTest {
         assertFalse(Server.sameOrigin("http://192.168.1.10:8090/", origin))
         assertTrue(Server.sameOrigin("http://192.168.1.10:8090/", "http://192.168.1.10:8090"))
     }
+
+    @Test
+    fun trickyAddressesStayOut() {
+        val origin = "https://example.org"
+        // The server's name as user info in front of another host is that other host.
+        assertFalse(Server.sameOrigin("https://example.org@evil.test/", origin))
+        assertFalse(Server.sameOrigin("https://example.org:443@evil.test/", origin))
+        // Other schemes, the name with a trailing dot (another name to a browser).
+        assertFalse(Server.sameOrigin("javascript:alert(1)", origin))
+        assertFalse(Server.sameOrigin("data:text/html,x", origin))
+        assertFalse(Server.sameOrigin("https://example.org./", origin))
+        // A private IPv6 address typed bare is taken as plain http, as a private IPv4 one is.
+        assertEquals("http://[fd12::1]", Server.originOf("[fd12::1]"))
+        assertEquals("https://[2001:db8::1]", Server.originOf("[2001:db8::1]"))
+        // User info typed in front is dropped from the origin.
+        assertEquals("https://example.org", Server.originOf("https://someone@example.org/"))
+    }
 }
